@@ -1,0 +1,153 @@
+﻿@model JollyAPI.Models.DTOS.BlogDTO;
+
+
+
+<div class="card">
+    <!--begin::Card header-->
+    <!--end::Card header-->
+    <!--begin::Form-->
+    <form id="blog_form" method="post" asp-action="Update" class="form" >
+        <input type="hidden" asp-for="Id" id="id" />
+        <!--begin::Card body-->
+        <div class="card-body p-9">
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center">
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Tiêu đề:
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <input type="text" asp-for="Title" class="form-control" id="title" name="title" placeholder="Enter Blog Title" value="@Model.Title" required="">
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Tóm tắt nội dung:
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <input type="text" asp-for="ShortContent" id="shortContent" class="form-control" name="shortcontent" placeholder="Enter ShortContent" value="@Model.ShortContent" required="">
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center">
+                <!--begin::Col-->
+
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Người dùng:
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row" style="font-style:bold">
+                    <input type="text" class="form-control" id="userId" name="userId" placeholder="Enter UserId" value="1" hidden>
+                    <input type="text" class="form-control" name="userId" placeholder="Enter UserId" value="ADMIN" disabled>
+
+                </div>
+
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Ngày đăng bài:
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <input type="date" asp-for="PublishedDate" id="publishedDate" class="form-control" name="PublishedDate" placeholder="Enter PublishedDate" value="@Model.PublishedDate?.ToString("yyyy-MM-dd")">
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center">
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Ảnh:
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+
+                    <a href="@Model.Image">
+                        <img src="@Model.Image"  class="img-fluid m-3" alt="Blog Image" />
+                    </a>
+
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Sửa đường dẫn ảnh:
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <input type="url" asp-for="Image" class="form-control" id="updateimage" name="image" placeholder="Enter ImageURL" value="@Model.Image" required="">
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center">
+                <!--end::Col-->
+                <!--begin::Col-->
+
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Nội dung:
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                @*  <div class="col-xl-8 fv-row">
+                <textarea  type="text" asp-for="Content"  class="form-control h-200px" id="Content" name="Content" placeholder="Nhập nội dung bài viết" ></textarea>
+                </div>*@
+
+                <div class="col-xl-8 fv-row">
+                    <textarea type="text" asp-for="Content" class="form-control h-200px" id="content" name="Content" placeholder="Nhập nội dung bài viết"></textarea>
+                </div>
+
+                <!--end::Col-->
+            </div>
+            <!--end::Card body-->
+            <!--begin::Card footer-->
+            <div class="card-footer d-flex justify-content-center py-6 px-9">
+                <a type="button" class="btn btn-secondary mx-5" asp-action="Index">Quay lại</a>
+                <button type="submit" class="btn btn-primary mx-5">Xác nhận</button>
+            </div>
+            <!--end::Card footer-->
+        </div>
+    </form>
+</div>
+
+@section SonJS{
+    <script>
+        CKEDITOR.replace('content')
+        document.getElementById('blog_form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            notifyUpdateBlog(@Model.Id);
+        });
+    </script>
+}

@@ -1,0 +1,214 @@
+﻿@using JollyAPI.Models.Entity
+@model JollyAPI.Models.DTOS.ProductUpdateDTO
+<div class="card">
+    <!--begin::Card header-->
+    <!--end::Card header-->
+    <!--begin::Form-->
+    <form id="employee_form" method="post" asp-action="Edit" class="form" enctype="multipart/form-data">
+        <input id="productId" type="hidden" asp-for="Id" />
+        <!--begin::Card body-->
+        <div class="card-body p-9">
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center">
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Tên sản phẩm
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <input type="text" asp-for="Name" class="form-control" name="name" placeholder="Enter Product Name" value="@Model.Name" required="">
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Giá
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <input type="text" asp-for="Price" class="form-control" name="price" placeholder="Enter Price" value="@Model.Price" required="">
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center">
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Số lượng
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <input asp-for="Quantity" class="form-control" placeholder="Enter Product Quantity" value="@Model.Quantity" required="">
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Giới tính
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <select asp-for="Gender" class="form-control" asp-items="@ViewBag.Genders">
+                        <option value="">Select Gender</option>
+                    </select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center">
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Thể loại
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="form-control">
+                        <option value="">Select Category</option>
+                    </select>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Thêm ảnh
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <div class="col-xl-3 fv-row">
+                    <input type="file" asp-for="ImageFiles" name="imageFiles" multiple class="form-control" required />
+                    <span asp-validation-for="ImageFiles" class="text-danger"></span>
+                </div>
+
+
+                <!--end::Col-->
+                <!--begin::Col-->
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center">
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Màu sắc
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+
+                    <select asp-for="ColorId" class="form-control" asp-items="@ViewBag.Colors">
+                        <option value="">Select Color</option>
+                    </select>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Hình ảnh
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="row">
+
+                        @foreach (Image image in ViewBag.Images)
+                        {
+                            <div class="col-sm-6">
+                                <input id="uuid" type="hidden" asp-for="@image.Id" />
+                                <a id="btn-delete" onclick="deleteImage()" class="btn btn-close" aria-label="Close"></a>
+
+                                <a href="@image.Url">
+                                    <img src="@image.Url" class="img-fluid m-3" alt="Product Image" />
+                                </a>
+                            </div>
+                        }
+
+
+                    </div>
+
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center">
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Mổ tả
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-8 fv-row">
+                    <textarea asp-for="Description" class="form-control h-200px" placeholder="Enter Description"></textarea>
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+        </div>
+        <!--end::Card body-->
+        <!--begin::Card footer-->
+        <div class="card-footer d-flex justify-content-center py-6 px-9">
+            <a type="button" class="btn btn-secondary mx-5" asp-action="Index">Trở về</a>
+            <button type="submit" class="btn btn-primary mx-5">Sửa sản phẩm</button>
+        </div>
+        <!--end::Card footer-->
+    </form>
+    <!--end:Form-->
+</div>
+<script>
+    document.getElementById('employee_form').addEventListener('submit', (event) => {
+        event.preventDefault();
+        notifyEditProduct(@Model.Id);
+    });
+
+    //document.getElementById('btn-delete').addEventListener('click', (event) => {
+    //    event.preventDefault();
+    //    deleteImage();
+    //})
+</script>
+
+<style>
+    .col-sm-6 {
+        position: relative;
+    }
+
+        .col-sm-6 .btn-close {
+            position: absolute;
+            top: -7px;
+            right: -28px;
+            visibility: hidden;
+        }
+
+        .col-sm-6:hover .btn-close {
+            visibility: visible;
+        }
+</style>

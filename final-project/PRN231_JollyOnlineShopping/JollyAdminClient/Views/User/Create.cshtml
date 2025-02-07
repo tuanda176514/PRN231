@@ -1,0 +1,53 @@
+﻿@model JollyAPI.Models.DTOS.User.UserDTO;
+@using JollyAdminClient.Helper;
+
+<div class="card">
+    <form method="post" asp-action="Add" asp-controller="User">
+        <div class="card-body p-9">
+            <div class="row mb-8 justify-content-center">
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Tên đầy đủ
+                    </div>
+                </div>
+                <div class="col-xl-3 fv-row">
+                    <input type="text" name="FullName" class="form-control" required>
+                </div>
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Email
+                    </div>
+                </div>
+                <div class="col-xl-3 fv-row">
+                    <input type="text" name="Email" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="row mb-8 justify-content-center">
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Mật khẩu
+                    </div>
+                </div>
+                <div class="col-xl-3 fv-row">
+                    <input type="password" name="Password" class="form-control" required>
+                </div>
+
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Số điện thoại
+                    </div>
+                </div>
+                <div class="col-xl-3 fv-row">
+                    <input type="text" name="Phone" class="form-control" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer d-flex justify-content-center py-6 px-9">
+            <button type="submit" class="btn btn-primary">Tạo người dùng</button>
+            <a asp-page="/User" class="btn btn-secondary mx-5">Quay lại</a>
+        </div>
+    </form>
+</div>
+

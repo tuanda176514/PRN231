@@ -1,0 +1,155 @@
+﻿@model JollyAPI.Models.Entity.Blog
+@{
+    var userId = Context.Session.GetInt32("userId");
+    var isAuthenticated = userId.HasValue && userId.Value > 0;
+}
+<div class="page-head tc pr oh cat_bg_img page_head_" style="padding: 40px 0!important">
+    <div class="parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0"
+         data-bgset="https://demo-kalles-4-1.myshopify.com/cdn/shop/files/shop-banner.jpg?v=1651829187&width=1944"></div>
+    <div class="container pr z_100">
+        <h1 class="mb__5 cw">Thông tin về: @Model.Title</h1>
+        <p class="mg__0">@Model.PublishedDate?.ToString("MMMM d, yyyy")</p>
+    </div>
+</div>
+<div class="container container_cat cat_default mt__60 mb__20">
+
+
+    <div class="row nt_single_blog">
+        <div class="col-lg-12 col-xs-12">
+            <div class="kalles-section nt_section type_isotope">
+                <div class="post-nt-loop">
+                    <div class="post-info mb__5">
+                        <h1 class="mg__0 fs__24 mt__15 ls__0 text-center" style="font-size: 40px">
+                            @Model.Title
+                        </h1>
+                        @*<a class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_571"
+                        style="background-image: url('@Model.Image'); background-size: auto 60%; background-position: center center;">
+                        </a>*@
+                        <div>
+                            <img src="@Model.Image" class="rounded mx-auto d-block" />
+                        </div>
+
+                        <span class="post-author mr__5">By <span class="cd">Admin</span></span>
+                        <span class="post-time">on <span class="cd">@Model.PublishedDate?.ToString("MMMM d, yyyy")</span></span>
+                        <h3 class="mg__0 fs__24 mt__15 ls__0 text-center">
+                            @Model.ShortContent
+                        </h3>
+                    </div>
+                    <div class="content">
+                        @Html.Raw(Model.Content)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="mt-0">
+
+    <!-- Display Comments -->
+    <div class="comments">
+        <h2 class="mg__0 h3 fs__16 mb__5 tu">Các lượt bình luận</h2>
+
+        @if (ViewBag.Comments.Count == 0)
+        {
+            <p>Chưa có bình luận nào cho bài viết này!.</p>
+        }
+        else
+        {
+            @foreach (var comment in ViewBag.Comments)
+            {
+                <div class="comment">
+                    <strong>@comment.User.FullName</strong> on @comment.Date?.ToString("MMMM d, yyyy"):
+                    <p>@comment.Content</p>
+                </div>
+            }
+        }
+        <form name="commentform" id="commentForm" class="r--form-write" method="post" asp-action="WriteComment">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <div class="col-12 mb__25">
+                <label for="CommentForm-body">Comment<span class="required">*</span></label>
+                <textarea cols="45" rows="8" name="Content" id="CommentForm-body" class="input-full" required=""></textarea>
+            </div>
+            @if (isAuthenticated)
+            {
+                <button type="submit" class="btn btn-primary">Đăng bình luận</button>
+            }
+            else
+            {
+                <button type="submit" id="btnComment" class="btn btn-primary">Đăng bình luận</button>
+            }
+        </form>
+    </div>
+</div>
+
+<style>
+    .comment .comment-date {
+        font-size: 10px; /* Thay đổi kích thước font chữ theo mong muốn */
+    }
+
+    .comments {
+        margin-top: 30px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+    }
+
+        .comments h2 {
+            font-size: 24px;
+            margin: 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+    .comment {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+        .comment strong {
+            font-weight: bold;
+        }
+
+        .comment p {
+            margin: 5px 0;
+        }
+
+        .comment form {
+            margin-top: 20px;
+        }
+
+        .comment label {
+            font-weight: bold;
+        }
+
+        .comment input[type="text"],
+        .comment input[type="email"],
+        .comment textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .comment .button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+    .required {
+        color: red;
+    }
+</style>
+<script>
+    document.getElementById('btnComment').addEventListener('click', (event) => {
+        event.preventDefault();
+        notifyComment();
+    })
+</script>

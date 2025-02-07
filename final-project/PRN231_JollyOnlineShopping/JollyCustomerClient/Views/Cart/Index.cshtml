@@ -1,0 +1,94 @@
+﻿@using JollyAPI.Models.DTOS;
+@using JollyCustomerClient.Helper
+@{
+    List<CartItemData> listItems = ViewBag.listItems;
+}
+@{
+    var userId = Context.Session.GetInt32("userId");
+   
+}
+<link rel="stylesheet" href="/assets/css/shopping-cart.css">
+<div id="user-info" data-userid="@userId"></div>
+<!-- hero title -->
+<div class="kalles-section page_section_heading">
+    <div class="page-head tc pr oh page_bg_img page_head_cart_heading">
+        <div class="parallax-inner nt_parallax_false nt_bg_lz pa t__0 l__0 r__0 b__0 lazyload"
+             data-bgset="https://demo-kalles-4-1.myshopify.com/cdn/shop/files/bg-heading.jpg">
+        </div>
+        <div class="container pr z_100">
+            <h1 class="tu mb__10 cw">Giỏ hàng</h1>
+        </div>
+    </div>
+</div>
+<!-- end hero title -->
+<!--cart section-->
+<div class="kalles-section cart_page_section container mt__60">
+    <form asp-action="Checkout" method="post" class="frm_cart_ajax_true frm_cart_page nt_js_cart pr oh ">
+        <div class="cart_header">
+            <div class="row al_center">
+                <div class="col-4">Sản phẩm</div>
+                <div class="col-2 tc">Giá</div>
+                <div class="col-1 tc">Kích cỡ</div>
+                <div class="col-1 tc">Màu sắc</div>
+                <div class="col-2 tc">Sô lượng</div>
+                <div class="col-2 tc tr_md">Đơn giá</div>
+            </div>
+        </div>
+        <div class="cart_items js_cat_items">
+            <div id="cart-tb"></div>
+        </div>
+        <div class="cart__footer mt__60">
+            <div class="row">
+                <div class="col-12 col-md-6 cart_actions tl_md tc order-md-2 order-2 mb__50">
+                </div>
+                <div class="col-12 tr_md tc order-md-4 order-4 col-md-6">
+                    <div class="total row in_flex fl_between al_center cd fs__18 tu">
+                        <div class="col-auto"><strong>Tổng đơn:</strong></div>
+                        <div class="col-auto tr js_cat_ttprice fs__20 fwm">
+                            <input type="text" id="total_price" value="" name="total" hidden />
+                            <div class="cart_tot_price"><span></span></div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p class="db txt_tax_ship mb__5">
+                        Thuế, phí giao hàng, giảm giá sẽ được tính sau khi đặt hàng
+                    </p>
+                    <div class="clearfix"></div>
+                    <button type="submit" name="update"
+                            class="button btn_update mt__10 mb__10 js_add_ld w__100">
+                        Update Cart
+                    </button>
+                    @*@if (listItems == null || listItems.Count == 0)
+                    {
+                        <p class="text-danger">Giỏ hàng rỗng, vui lòng quay lại!</p>
+                    }
+                    else
+                    {*@
+                        @if (userId != null)
+						{
+                        @if (listItems == null || listItems.Count == 0)
+                        {
+                            <p class="text-danger">Giỏ hàng rỗng, vui lòng quay lại!</p>
+                        }
+                        else
+                        {
+
+                            <button type="submit" data-confirm="ck_lumise" name="checkout"
+                                    class="btn_checkout button button_primary tu mt__10 mb__10 js_add_ld w__100">
+                                Mua hàng
+                            </button>
+                        }
+
+                    }else{
+                            <a class="text-danger font-weight-bold" href="/User/Login">Vui lòng đăng nhập để tiếp tục đặt hàng.</a>
+                        }
+                        
+                   @* }*@
+
+                 
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,219 @@
+﻿@model JollyAPI.Models.Entity.Product;
+@using JollyAdminClient.Helper;
+<div class="card">
+    <!--begin::Card header-->
+    <!--end::Card header-->
+    <!--begin::Form-->
+    <form id="employee_form" method="get" asp-action="Details" asp-controller="Product" class="form">
+        <!--begin::Card body-->
+        <div class="card-body p-9">
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center align-items-center">
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Tên sản phẩm
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <input type="text" class="form-control form-control-solid" value="@Model.Name" disabled>
+                    @*<span>@Model.Name</span>*@
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Giá
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    @if (Model.Price != null)
+                    {
+                        @*<span>@FormatString.FormatVND(Model.Price)</span>*@
+                        <input type="text" class="form-control form-control-solid" value="@FormatString.FormatVND(Model.Price)" disabled>
+
+                    }
+                    else
+                    {
+                        @:N/A
+                    }
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center align-items-center">
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Số lượng
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    @*<span>@Model.Quantity</span>*@
+                    <input type="text" class="form-control form-control-solid" value="@Model.Quantity" disabled>
+
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Giới tính
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    @*<span>@Model.Gender</span>*@
+                    <input type="text" class="form-control form-control-solid" value="@Model.Gender" disabled>
+
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center align-items-center">
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Thể loại
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    @if (Model.Category != null)
+                    {
+                        @*<span>@Model.Category?.Name</span>*@
+                        <input type="text" class="form-control form-control-solid" value="@Model.Category?.Name" disabled>
+
+
+                    }
+                    else
+                    {
+                        <span>N/A</span>
+                    }
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Hình ảnh
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-3">
+                    <div class="row">
+                        @foreach (var image in Model.Images)
+                        {
+                            <div class="col-sm-6">
+                                <a href="@image.Url">
+                                    <img src="@image.Url" class="img-fluid m-3" alt="Product Image" />
+                                </a>
+                            </div>
+                        }
+
+
+
+                    </div>
+                </div>
+
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center align-items-center">
+                <!--begin::Col-->
+
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Màu sắc
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    @foreach (var item in ViewBag.colors)
+                    {
+                        <div style="display: flex; align-items: center; padding: 8px 0">
+                            <div style="border: 1px solid #000;width: 20px; height: 20px; border-radius: 50%; background-color: @item.Hex;"></div>
+                            <div>
+                                <span style="margin-left:10px">@item.Name</span>
+
+                            </div>
+
+
+                        </div>
+
+
+                    }
+                </div>
+
+
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Kích cỡ
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <div class="d-flex fw-bold">
+                        @foreach (var size in Model.Sizes)
+                        {
+                            <div style="margin: 0 20px 0 0;">
+                                <span>
+                                    @size.Name
+                                </span>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center align-items-center">
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Mô tả
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-8 fv-row">
+                    <textarea class="form-control form-control-solid h-200px" disabled>@Model.Description</textarea>
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+        </div>
+        <!--end::Card body-->
+        <!--begin::Card footer-->
+        <div class="card-footer d-flex justify-content-center py-6 px-9">
+            <a type="button" class="btn btn-secondary mx-5" href="/Product/Index">Trở về</a>
+            @*<button type="submit" class="btn btn-primary mx-5">Submit</button>*@
+        </div>
+        <!--end::Card footer-->
+    </form>
+    <!--end:Form-->
+</div>

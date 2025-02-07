@@ -1,0 +1,78 @@
+﻿@model JollyAPI.Models.DTOS.User.UserDTO;
+@using JollyAdminClient.Helper;
+
+<div class="card">
+    <!--begin::Card header-->
+    <!--end::Card header-->
+    <!--begin::Form-->
+    <form id="employee_form" method="post" asp-action="Update" asp-controller="User" class="form">
+        <!--begin::Card body-->
+        <div class="card-body p-9">
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center">
+                <input type="hidden" name="Id" value="@Model.Id">
+                <input type="hidden" name="Password" value="@Model.Password">
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Tên đầy đủ
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <input type="text" class="form-control" name="FullName" value="@Model.FullName">
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Email
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <input readonly type="text" class="form-control form-control-solid" name="Email" value="@Model.Email">
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center">
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Số điện thoại
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <input type="text" class="form-control" name="Phone" value="@Model.Phone">
+                </div>
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Quyền
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <select class="form-control" name="Role">
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+            <!--end::Row-->
+        </div>
+        <!--end::Card body-->
+        <!--begin::Card footer-->
+        <div class="card-footer d-flex justify-content-center py-6 px-9">
+            <a type="button" class="btn btn-secondary mx-5" href="/User">Quay lại</a>
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
+        </div>
+        <!--end::Card footer-->
+    </form>
+    <!--end:Form-->
+</div>

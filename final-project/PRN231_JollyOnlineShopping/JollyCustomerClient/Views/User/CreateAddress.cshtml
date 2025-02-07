@@ -1,0 +1,51 @@
+﻿@{
+    var userId = Context.Session.GetInt32("userId");
+}
+<!--hero banner-->
+<div class="kalles-section page_section_heading">
+    <div class="page-head tc pr oh cat_bg_img page_head_">
+        <div class="parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0"
+             data-bgset="https://demo-kalles-4-1.myshopify.com/cdn/shop/files/shop-banner.jpg?v=1651829187&width=1944"></div>
+        <div class="container pr z_100">
+            <h1 class="mb__5 cw">Tài Khoản Của Bạn</h1>
+        </div>
+    </div>
+</div>
+<!--end hero banner-->
+<!--page content-->
+<div class="container cb ">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6 login-form mt__60 mb__60">
+            <div id="CustomerRegisterForm">
+                <form id="form-createAddress" method="post">
+                    <div id="user-info" data-userid="@userId"></div>
+                    <div class="form-group my-1 w-100">
+                        <label>Thành Phố:</label>
+                        <select class="form-select form-select-sm mb-3" id="city" aria-label=".form-select-sm" name="City">
+                            <option value="" selected>Chọn tỉnh thành</option>
+                        </select>
+                    </div>
+                    <div class="form-group my-1 w-100">
+                        <label>Quận/Huyện:</label>
+                        <select class="form-select form-select-sm mb-3" id="district" aria-label=".form-select-sm" name="District">
+                            <option value="" selected>Chọn quận huyện</option>
+                        </select>
+                    </div>
+                    <div class="form-group my-1 w-100">
+                        <label>Phường/Xã:</label>
+                        <select class="form-select form-select-sm" id="ward" aria-label=".form-select-sm" name="Ward">
+                            <option value="" selected>Chọn phường xã</option>
+                        </select>
+                    </div>
+                    <div class="form-group my-1 w-100">
+                        <label>Đường:</label>
+                        <input id="street" required type="text" class="form-control" name="Street" />
+                    </div>
+                    <button id="btn-submitAddress" type="submit" class="btn js_add_ld btn-secondary">Tạo</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>

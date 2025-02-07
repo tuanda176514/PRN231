@@ -1,0 +1,90 @@
+﻿@using JollyAPI.Models.Entity;
+@using JollyCustomerClient.Helper;
+@{
+	List<Product> products = ViewBag.products;
+}
+<style>
+	.text-hover {
+		transition: all 0.5s;
+	}
+
+		.text-hover:hover {
+			color: #80dbe9 !important;
+		}
+</style>
+<!--shop banner-->
+<div class="kalles-section page_section_heading">
+	<div class="page-head tc pr oh cat_bg_img page_head_" style="padding:40px 0!important">
+		<div class="parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0"
+			 data-bgset="https://demo-kalles-4-1.myshopify.com/cdn/shop/files/shop-banner.jpg?v=1651829187&width=1944"></div>
+		<div class="container pr z_100">
+			<h1 class="mb__5 cw">Tìm kiếm </h1>
+			<p class="mg__0">Tìm kiếm theo sản phẩm ưa thích của bạn</p>
+		</div>
+	</div>
+	<div class="containter" style="margin:80px 0;">
+		<div class="row justify-content-center mb-3">
+			<div class="col-6 px-0">
+				<form id="my-form">
+					<div class="d-flex  justify-content-center">
+						<input id="p-name" class="form-control py-3" placeholder="Tìm kiếm sản phẩm" name="name" />
+						<button type="submit" class="btn btn-secondary px-3">
+							<a class="icon_search push_side cb chp">
+								<i class="iccl iccl-search"></i>
+							</a>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-6">
+				<div class="row">
+					<div class="col-12 px-0" style="border:solid 1px #dddddd;">
+						<p class="mb-0" style="padding:15px;font-size:14px;font-weight:500;background-color:#f9f9f9;color:#222;">Gợi ý sản phẩm</p>
+					</div>
+					@if (products != null)
+					{
+						@foreach (var p in products)
+						{
+							<div class="col-6 p-3" style="border:solid 1px #dddddd;">
+								@if(p.Images != null && p.Images.Count > 1)
+								{
+									<div class="row">
+										<div class="col-4">
+											<img src="@p.Images?.ToList().First()?.Url" alt="product" class="img-fluid" style="width:100px">
+										</div>
+										<div class="col">
+											<div class="mb-2"><a href="/" class="text-secondary" style="font-weight:500;">Jolly</a></div>
+											<a href="/product/detail/@p.Id" class="text-hover" style="font-weight:500;">@p.Name</a>
+											<div class="text-secondary" style="font-weight:500;">@FormatString.FormatVND(p.Price)<span>đ</span></div>
+										</div>
+									</div>
+								}else
+								{
+									<div class="row">
+									<div class="col-4">
+										<img src="./assets/images/products/pr-01.jpg" alt="product" class="img-fluid" style="width:100px">
+									</div>
+									<div class="col">
+										<div class="mb-2"><a href="/" class="text-secondary" style="font-weight:500;">Jolly</a></div>
+										<a href="/product/detail/@p.Id" class="text-hover" style="font-weight:500;">@p.Name</a>
+										<div class="text-secondary" style="font-weight:500;">@FormatString.FormatVND(p.Price)<span>đ</span></div>
+									</div>
+								</div>
+								}
+								
+							</div>
+						}
+
+					}
+					<div class="col-12 px-0" style="border:solid 1px #dddddd;">
+						<p style="padding:15px;font-size:14px;font-weight:500;background-color:#f9f9f9;color:#222;" class="text-hover mb-0 text-center"><a href="/product">XEM TẤT CẢ</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--end shop banner-->
+

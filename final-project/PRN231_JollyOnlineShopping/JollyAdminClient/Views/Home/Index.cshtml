@@ -1,0 +1,184 @@
+﻿@using JollyAPI.Models.DTOS.Statistic;
+@using JollyAdminClient.Helper;
+@{
+	StatisticReport report = ViewBag.report;
+	Layout = "_LayoutDashboard";
+}
+
+<!--begin::Row-->
+<div class="row gy-5 g-xl-8 mt-10">
+	<!--begin::Col-->
+	<div class="col-xxl-4">
+		<!--begin::Mixed Widget 2-->
+		<div class="card card-xxl-stretch">
+			<!--begin::Header-->
+			<div class="card-header border-0 bg-danger py-5">
+				<h3 class="card-title fw-bolder text-white" style="
+    font-size: 23px;
+">
+					Thống kê trong tháng @DateTime.Now.Month
+				</h3>
+			</div>
+			<!--end::Header-->
+			<!--begin::Body-->
+			<div class="card-body p-0">
+				<!--begin::Chart-->
+				<div class="mixed-widget-2-chart card-rounded-bottom bg-danger"
+					 data-kt-color="danger" style="height: 200px"></div>
+				<!--end::Chart-->
+				<!--begin::Stats-->
+				<div class="card-p mt-n20 position-relative">
+					<!--begin::Row-->
+					<div class="row g-0">
+						<!--begin::Col-->
+						<div class="col bg-light-danger px-6 py-8 rounded-2 me-7 mb-7">
+							<!--begin::Svg Icon | path: icons/duotone/Media/Equalizer.svg-->
+							<span class="fw-bolder svg-icon svg-icon-3x svg-icon-warning d-block my-2">
+								Tổng đơn hàng
+							</span>
+							<!--end::Svg Icon-->
+							<a href="#" class="text-danger fw-bold counter" 
+							style="font-size:35px">@report.TotalMonthOrders</a>
+						</div>
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col bg-light-primary px-6 py-8 rounded-2 mb-7">
+							<!--begin::Svg Icon | path: icons/duotone/Communication/Add-user.svg-->
+							<span class="fw-bolder svg-icon svg-icon-3x svg-icon-primary d-block my-2">
+								Tổng sản phẩm
+							</span>
+							<!--end::Svg Icon-->
+							<a href="#" class="text-primary fw-bold counter" style="font-size:35px">@report.TotalProducts</a>
+						</div>
+						<!--end::Col-->
+					</div>
+					<!--end::Row-->
+					<!--begin::Row-->
+					<div class="row g-0">
+						<!--begin::Col-->
+						<div class="col bg-light-warning px-6 py-8 rounded-2 me-7">
+							<!--begin::Svg Icon | path: icons/duotone/Design/Layers.svg-->
+							<span class="fw-bolder svg-icon svg-icon-3x svg-icon-danger d-block my-2">
+								Đánh giá
+							</span>
+							<!--end::Svg Icon-->
+							<a href="#" class="text-warning fw-bold mt-2" style="font-size:30px">
+								<span class="counter">
+									@if(report.TotalRating.ToString().Length > 4)
+									{
+										@report.TotalRating.ToString().Substring(0,4)
+									}else
+									{
+										@report.TotalRating.ToString()
+									}
+									</span>
+								<i class="fa fa-star text-warning" style="font-size:20px"></i>
+							</a>
+						</div>
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col bg-light-success px-6 py-8 rounded-2">
+							<!--begin::Svg Icon | path: icons/duotone/Communication/Urgent-mail.svg-->
+							<span class="fw-bolder svg-icon svg-icon-3x svg-icon-success d-block my-2">
+								Doanh thu
+							</span>
+							<!--end::Svg Icon-->
+							<a href="#" class="text-success fw-bold mt-2" style="font-size:30px"><span class="counter">@FormatString.FormatMilion(report.TotalRevenue)</span>M</a>
+						</div>
+						<!--end::Col-->
+					</div>
+					<!--end::Row-->
+				</div>
+				<!--end::Stats-->
+			</div>
+			<!--end::Body-->
+		</div>
+		<!--end::Mixed Widget 2-->
+	</div>
+	<!--end::Col-->
+	<!--begin::Col-->
+	<div class="col-xxl-4">
+		<!--begin::List Widget 5-->
+		<div class="card card-xxl-stretch">
+			<!--begin::Header-->
+			<div class="card-header align-items-center border-0 mt-4">
+				<h3 class="card-title align-items-start flex-column">
+					<span class="fw-bolder mb-2 text-dark">Hoạt động gần đây</span>
+					<span class="text-muted fw-bold fs-7">Tổng @report.TotalOrders đơn hàng đã bán</span>
+				</h3>
+			</div>
+			<!--end::Header-->
+			<!--begin::Body-->
+			<div class="card-body pt-5">
+				<!--begin::Timeline-->
+				<div class="timeline-label">
+					@foreach (var o in report.RecentOrders)
+					{
+						<!--begin::Item-->
+						<div class="timeline-item">
+							<!--begin::Label-->
+							<div class="timeline-label fw-bolder text-gray-800 fs-6">@o.Date.ToString("dd/MM")</div>
+							<!--end::Label-->
+							<!--begin::Badge-->
+							<div class="timeline-badge">
+								<i class="fa fa-genderless text-primary fs-1"></i>
+							</div>
+							<!--end::Badge-->
+							<!--begin::Desc-->
+							<div class="timeline-content fw-mormal text-gray-800 ps-3">
+								<span class="fw-bolder">@o.CustomerName </span>
+								đã đặt đơn hàng mới với tổng giá trị là
+								<span class="fw-bolder">@FormatString.FormatVND((decimal)o.Total) đ</span>
+							</div>
+							<!--end::Desc-->
+						</div>
+						<!--end::Item-->
+					}
+
+				</div>
+				<!--end::Timeline-->
+			</div>
+			<!--end: Card Body-->
+		</div>
+		<!--end: List Widget 5-->
+	</div>
+	<!--end::Col-->
+	<!--begin::Col-->
+	<div class="col-xl-4">
+		<!--begin::List Widget 2-->
+		<div class="card card-xl-stretch mb-xl-8">
+			<!--begin::Header-->
+			<div class="card-header border-0">
+				<h3 class="card-title fw-bolder text-dark">Top sản phẩm bán chạy 🔥</h3>
+			</div>
+			<!--end::Header-->
+			<!--begin::Body-->
+			<div class="card-body pt-2">
+				@foreach (var p in report.TopProductReport)
+				{
+					<!--begin::Item-->
+					<div class="d-flex align-items-center mb-7">
+						<!--begin::Avatar-->
+						<div class="symbol symbol-50px me-5">
+							<img style="width:50px; height:75px;" src="@p.Url" class="" alt="" />
+						</div>
+						<!--end::Avatar-->
+						<!--begin::Text-->
+						<div class="flex-grow-1">
+							<a href="/Product/Details/@p.Id" class="text-dark fw-bolder text-hover-primary fs-6">
+								@p.Name
+							</a>
+							<span class="text-muted d-block fw-bold">Đã bán @p.Quantity Sản phẩm</span>
+						</div>
+						<!--end::Text-->
+					</div>
+					<!--end::Item-->
+				}
+
+			</div>
+			<!--end::Body-->
+		</div>
+		<!--end::List Widget 2-->
+	</div>
+	<!--end::Col-->
+</div>

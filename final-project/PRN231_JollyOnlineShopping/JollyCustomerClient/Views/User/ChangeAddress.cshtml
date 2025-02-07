@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+@model List<JollyAPI.Models.Entity.Address>
+<!--hero banner-->
+<div class="kalles-section page_section_heading">
+    <div class="page-head tc pr oh cat_bg_img page_head_">
+        <div class="parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0"
+             data-bgset="https://demo-kalles-4-1.myshopify.com/cdn/shop/files/shop-banner.jpg?v=1651829187&width=1944"></div>
+        <div class="container pr z_100">
+            <h1 class="mb__5 cw">Tài Khoản Của Bạn</h1>
+        </div>
+    </div>
+</div>
+<!--end hero banner-->
+<!--page content-->
+<div class="container cb ">
+    <div class="row">
+        <div class="container mb-5">
+            <div id="CustomerRegisterForm">
+                <h2>Chỉnh sửa địa chỉ</h2>
+                <p class="ml-3">
+                    <a href="/User/CreateAddress" class="btn btn-success"><i class="fa fa-plus-circle"></i> Tạo mới địa chỉ</a>
+                </p>
+                <div class="container mb-5">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Đường</th>
+                                <th>Phường/Xã</th>
+                                <th>Quận/Huyện</th>
+                                <th>Thành Phố</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var address in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @address.Street
+                                    </td>
+                                    <td>
+                                        @address.City
+                                    </td>
+                                    <td>
+                                        @address.District
+                                    </td>
+                                    <td>
+                                        @address.Ward
+                                    </td>
+                                    <td>
+                                        <a href="/User/EditAddress?userId=@address.UserId&id=@address.Id" class="text-decoration-none" style="font-size:22px;">
+                                            <i class="fa fa-pen-square fs_5"></i>
+                                        </a>
+
+                                        <span onclick="deleteAddress(@address.Id,@address.UserId)" class="text-decoration-none" style="cursor:pointer;font-size:22px;">
+                                            <i class="fa fa-trash-alt fs_5"></i>
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

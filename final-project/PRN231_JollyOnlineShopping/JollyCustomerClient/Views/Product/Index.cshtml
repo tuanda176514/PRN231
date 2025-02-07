@@ -1,0 +1,166 @@
+﻿@using JollyAPI.Models.Entity;
+@using JollyCustomerClient.Helper;
+@{
+	List<Product> products = ViewBag.products;
+	string sort = ViewBag.sort;
+	string name = ViewBag.name;
+	int totalProduct = ViewBag.totalProduct;
+	int totalPage = ViewBag.totalPage;
+	int page = ViewBag.page;
+}
+
+<!--shop banner-->
+<div class="kalles-section page_section_heading">
+	<div class="page-head tc pr oh cat_bg_img page_head_" style="padding:40px 0!important">
+		<div class="parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0"
+			 data-bgset="https://demo-kalles-4-1.myshopify.com/cdn/shop/files/shop-banner.jpg?v=1651829187&width=1944"></div>
+		<div class="container pr z_100">
+			<h1 class="mb__5 cw">@totalProduct kết quả tìm kiếm cho: &quot;<span class="font-weight-bold">@name</span>&quot;</h1>
+		</div>
+	</div>
+</div>
+<!--end shop banner-->
+
+<div class="container container_cat pop_default cat_default mb__20">
+	<!--grid control-->
+	<div class="cat_toolbar row fl_center al_center mt__30">
+		<div class="cat_filter col op__0 pe_none">
+			<a href="#" data-opennt="#kalles-section-nt_filter" data-pos="left" data-remove="true"
+			   data-class="popup_filter" data-bg="hide_btn" class="has_icon btn_filter mgr">
+				<i class="iccl fwb iccl-filter fwb mr__5"></i>Filter
+			</a>
+			<a href="#" data-id="#kalles-section-nt_filter" class="btn_filter js_filter dn mgr">
+				<i class="iccl fwb iccl-filter fwb mr__5"></i>Filter
+			</a>
+		</div>
+		<div class="cat_sortby cat_sortby_js col tr kalles_dropdown kalles_dropdown_container">
+			<a class="in_flex fl_between al_center sortby_pick kalles_dropDown_label" href="#">
+				<span class="lbl-title sr_txt dn">
+					@if (sort.Equals("asc"))
+					{
+						@:Giá, thấp tới cao
+					}
+					else
+					{
+						@:Giá, cao tới thấp
+					} 
+				</span>
+				<span class="lbl-title sr_txt_mb">Sắp xếp</span>
+				<i class="ml__5 mr__5 facl facl-angle-down"></i>
+			</a>
+			<div class="nt_sortby dn">
+				<svg class="ic_triangle_svg" viewBox="0 0 20 9" role="presentation">
+					<path d="M.47108938 9c.2694725-.26871321.57077721-.56867841.90388257-.89986354C3.12384116 6.36134886 5.74788116 3.76338565 9.2467995.30653888c.4145057-.4095171 1.0844277-.40860098 1.4977971.00205122L19.4935156 9H.47108938z"
+						  fill="#ffffff"></path>
+				</svg>
+				<div class="h3 mg__0 tc cd tu ls__2 dn_lg db">
+					Sắp xếp
+					<i class="pegk pe-7s-close fs__50 ml__5"></i>
+				</div>
+				<div class="nt_ajaxsortby wrap_sortby kalles_dropdown_options">
+					<script>
+						function sortClick(type) {
+							if (type == 1) {
+								window.location.href = "/product?name=@name&sort=asc";
+							} else{
+								window.location.href = "/product?name=@name&sort=des";
+							}
+						}
+					</script>
+					@if (sort.Equals("asc"))
+					{
+						<a data-label="Giá, thấp tới cao" class="kalles_dropdown_option truncate selected"
+						   onclick="sortClick(1)">Giá, thấp tới cao</a>
+						<a data-label="Giá, cao tới thấp" class="kalles_dropdown_option truncate"
+						   onclick="sortClick(0)">Giá, cao tới thấp</a>
+					}
+					else
+					{
+						<a data-label="Giá, thấp tới cao" class="kalles_dropdown_option truncate"
+						   onclick="sortClick(1)">Giá, thấp tới cao</a>
+						<a data-label="Giá, cao tới thấp" class="kalles_dropdown_option truncate selected"
+						onclick="sortClick(0)">Giá, cao tới thấp</a>
+					}
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--end grid control-->
+	<!--product section-->
+	<div class="row">
+		<div class="col-lg-12 col-12">
+			<div class="kalles-section tp_se_cdt">
+				<!--products list-->
+				<div class="on_list_view_false products nt_products_holder row fl_center row_pr_1 cdt_des_1 round_cd_false nt_cover ratio_nt position_8 space_30 nt_default">
+					@if (products != null && products.Count > 0)
+					{
+						@foreach (var p in products)
+						{
+							<div class="col-lg-3 col-md-3 col-6 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1">
+								<div class="product-inner pr">
+									<div class="product-image pr oh lazyload">
+										@if (p.Images != null && p.Images.Count > 1)
+										{
+											<a class="d-block" href="/product/detail/@p.Id">
+												<div class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_586"
+													 data-bgset="@p.Images.ToList()[0].Url"></div>
+											</a>
+											<div class="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
+												<div class="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_586"
+													 data-bgset="@p.Images.ToList()[1].Url"></div>
+											</div>
+										}
+										else
+										{
+											<a class="d-block" href="/product/detail/@p.Id">
+												<div class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_586"
+													 data-bgset="./assets/images/products/pr-01.jpg"></div>
+											</a>
+											<div class="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
+												<div class="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_586"
+													 data-bgset="./assets/images/products/pr-01.jpg"></div>
+											</div>
+										}
+										<div class="nt_add_w ts__03 pa ">
+										</div>
+									</div>
+									<div class="product-info mt__15">
+										<h3 class="product-title pr fs__14 mg__0 fwm">
+											<a class="cd chp" href="/product/detail/@p.Id">
+												@p.Name
+											</a>
+										</h3>
+										<span class="price dib mb__5">@FormatString.FormatVND(p.Price)<span>đ</span></span>
+									</div>
+								</div>
+							</div>
+						}
+					}
+				</div>
+				<!--end products list-->
+				<!--navigation-->
+				<div class="products-footer tc mt__40">
+					<nav class="nt-pagination w__100 tc paginate_ajax">
+						<ul class="pagination-page page-numbers">
+							@for (int i = 1; i <= totalPage; i++)
+							{
+
+								@if (page == i)
+								{
+									<li><a class="page-numbers current" href="/product?name=@name&page=@i&sort=@sort">@i</a></li>
+								}
+								else
+								{
+									<li><a class="page-numbers" href="/product?name=@name&page=@i&sort=@sort">@i</a></li>
+								}
+							}
+						</ul>
+					</nav>
+				</div>
+				<!--end navigation-->
+			</div>
+		</div>
+	</div>
+	<!--end product section-->
+</div>

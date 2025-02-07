@@ -1,0 +1,180 @@
+﻿<div class="card">
+    <!--begin::Card header-->
+    <!--end::Card header-->
+    <!--begin::Form-->
+    <form id="employee_form" method="get" action="#" class="form">
+        <!--begin::Card body-->
+        <div class="card-body p-9">
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center">
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Name
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <input type="text" class="form-control" name="name" placeholder="Type Employee Name" value="" required="">
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Date of Birth
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <input type="date" class="form-control" name="dob" value="" required="">
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center">
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Email
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <input type="email" class="form-control" name="email" placeholder="Type Employee Email" value="" required="">
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Phone
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <input type="tel" class="form-control" name="phone" placeholder="Type Employee Phone" value="" required="">
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center">
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Position
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <select class="form-select" name="position" required="">
+                        <option value="" selected="" disabled="">Select Position</option>
+                        <option value="1">HR</option>
+                        <option value="2">INTERN</option>
+                        <option value="3">PM</option>
+                        <option value="4">STAFF</option>
+                    </select>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Branch
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <select class="form-select" name="branch" required="">
+                        <option value="" selected="" disabled="">Select Branch</option>
+                        <option value="1">Ha Noi 1</option>
+                        <option value="2">Ha Noi 2</option>
+                        <option value="3">Ha Noi 3</option>
+                        <option value="4">Sai Gon 1</option>
+                        <option value="5">Sai Gon 2</option>
+                        <option value="6">Da Nang</option>
+                        <option value="7">Vinh</option>
+                        <option value="8">Quy Nhon</option>
+                    </select>
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center">
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Address
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <input type="text" class="form-control" name="address" value="" required="">
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Status
+                        <span class="text-danger">*</span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-3 fv-row">
+                    <div class="d-flex fw-bold">
+                        <div class="form-check form-check-custom me-9 ">
+                            <input class="form-check-input" type="radio" value="1" name="status" checked="checked">
+                            <label class="form-check-label ms-3">Active</label>
+                        </div>
+                        <div class="form-check form-check-custom">
+                            <input class="form-check-input" type="radio" value="0" name="status">
+                            <label class="form-check-label ms-3">Inactive</label>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8 justify-content-center">
+                <!--begin::Col-->
+                <div class="col-xl-2">
+                    <div class="fs-6 fw-bold mt-2 mb-3">
+                        Description
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-8 fv-row">
+                    <textarea  class="form-control h-200px" placeholder="Type Employee Phone" ></textarea>
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+        </div>
+        <!--end::Card body-->
+        <!--begin::Card footer-->
+        <div class="card-footer d-flex justify-content-center py-6 px-9">
+            <a type="button" class="btn btn-secondary mx-5" href="/employees/list">Back</a>
+            <button type="submit" class="btn btn-primary mx-5">Submit</button>
+        </div>
+        <!--end::Card footer-->
+    </form>
+    <!--end:Form-->
+</div>

@@ -1,0 +1,93 @@
+﻿@using JollyAPI.Models.Entity;
+@using JollyCustomerClient.Helper;
+@{
+    List<Product> products = ViewBag.Products;
+}
+<link rel="stylesheet" href="/assets/css/shop.css">
+<!--shop banner-->
+<div class="kalles-section page_section_heading">
+	<div class="page-head tc pr oh cat_bg_img page_head_" style="padding:40px 0!important">
+		<div class="parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0"
+			 data-bgset="https://demo-kalles-4-1.myshopify.com/cdn/shop/files/shop-banner.jpg?v=1651829187&width=1944"></div>
+		<div class="container pr z_100">
+			<h1 class="mb__5 cw">Danh sách yêu thích</h1>
+		</div>
+	</div>
+</div>
+<!--end shop banner-->
+
+<div id="kalles-section-wishlist_page" class="container container_cat pop_default cat_default mb__20">
+
+    <!--product section-->
+    <div class="row">
+        <div class="col-lg-12 col-12">
+            <div class="kalles-section tp_se_cdt">
+                <!--products list-->
+                <div class="on_list_view_false prs_wis products nt_products_holder row fl_center row_pr_1 cdt_des_1 round_cd_false nt_cover ratio_nt position_8 space_30 nt_default">
+                    @if(products == null || products.Count == 0)
+					{
+						<div class="col-lg-12 col-md-12 col-12">
+							<div class="alert alert-warning text-center" role="alert">
+								Danh sách yêu thích trống
+							</div>
+						</div>
+					}
+					else
+					{
+                        @foreach (var p in products)
+                        {
+                            <div class="col-lg-3 col-md-3 col-6 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1">
+                                <div class="product-inner pr">
+                                    <div class="product-image pr oh lazyload">
+                                        @if (p.Images != null && p.Images.Count > 1)
+                                        {
+                                            <a class="d-block" href="/product/detail/@p.Id">
+                                                <div class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_586"
+                                                     data-bgset="@p.Images.ToList()[0].Url"></div>
+                                            </a>
+                                            <div class="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
+                                                <div class="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_586"
+                                                     data-bgset="@p.Images.ToList()[1].Url"></div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <a class="d-block" href="/product/detail/@p.Id">
+                                                <div class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_586"
+                                                     data-bgset="./assets/images/products/pr-01.jpg"></div>
+                                            </a>
+                                            <div class="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
+                                                <div class="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_586"
+                                                     data-bgset="./assets/images/products/pr-01.jpg"></div>
+                                            </div>
+                                        }
+                                        <div class="nt_add_w ts__03 pa ">
+                                            <div onclick="ModifyItem(@p.Id)">
+                                                <a  href="#" class="cb chp ttip_nt tooltip_right wis_remove">
+                                                    <span class="tt_txt">Xóa khỏi danh sách</span><i class="facl facl-heart-o"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="hover_button op__0 tc pa flex column ts__03">
+                                        </div>
+                                    </div>
+                                    <div class="product-info mt__15">
+                                        <h3 class="product-title pr fs__14 mg__0 fwm">
+                                            <a class="cd chp" href="/product/detail/@p.Id">
+                                                @p.Name
+                                            </a>
+                                        </h3>
+                                        <span class="price dib mb__5">@FormatString.FormatVND(p.Price)<span>đ</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+					}
+                </div>
+                <!--end products list-->
+            </div>
+        </div>
+    </div>
+    <!--end product section-->
+
+</div>

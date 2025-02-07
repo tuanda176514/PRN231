@@ -1,0 +1,110 @@
+﻿@using JollyAPI.Models.Entity;
+@using JollyCustomerClient.Helper;
+@{
+    List<Order> orders = ViewBag.orders;
+}
+<div class="kalles-section page_section_heading">
+    <div class="page-head tc pr oh page_bg_img page_head_cart_heading">
+        <div class="parallax-inner nt_parallax_false nt_bg_lz pa t__0 l__0 r__0 b__0 lazyload"
+             data-bgset="https://demo-kalles-4-1.myshopify.com/cdn/shop/files/bg-heading.jpg">
+        </div>
+        <div class="container pr z_100">
+            <h1 class="tu mb__10 cw">Đơn hàng</h1>
+        </div>
+    </div>
+</div>
+
+
+@if (orders == null || orders.Count == 0)
+{
+    <div class="col-lg-12 col-md-12 col-12">
+        <div class="alert alert-warning text-center py-5 bg-row-bold fs_30" role="alert">
+            Danh sách đặt hàng trống
+        </div>
+    </div>
+}
+else
+{
+    <form action="" method="get" class="container mt-4">
+        <div class="d-flex">
+            <div class="form-group my-1 w-25">
+                <label>Ngày bắt đầu:</label>
+                <input type="date" class="form-control" name="from" />
+            </div>
+
+            <div class="form-group my-1 w-25 mx-3">
+                <label>Ngày kết thúc:</label>
+                <input type="date" class="form-control" name="to" />
+            </div>
+            <button type="submit" class="btn btn-primary my-4">Tìm kiếm</button>
+        </div>
+
+    </form>
+    <div class="container mb-5">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Ngày đặt hàng</th>
+                    <th>Trạng thái</th>
+                    <th>Tổng</th>
+                    <th>Địa chỉ</th>
+                    <th>Chi tiết</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in orders)
+                {
+                    <tr>
+                        <td>@p.Id</td>
+
+                        <td>@p.Date.ToString("dd/MM/yyyy")</td>
+                        @if (p.Status == "done")
+                        {
+                            <td>
+                                <button style="background-color: green; color: white; border: 1px solid white;">
+                                    Hoàn thành
+                                </button>
+                            </td>
+                        }
+                        else if (p.Status == "shipping")
+                        {
+                            <td>
+                                <button style="background-color: yellow; color: white; border: 1px solid white;">
+                                    Đang gửi
+                                </button>
+                            </td>
+                        }
+                        else if (p.Status == "pending")
+                        {
+                            <td>
+                                <button style="background-color: blue; color: white; border: 1px solid white;">
+                                    Chưa xác nhận
+                                </button>
+                            </td>
+                        }
+                        else if (p.Status == "cancel")
+                        {
+                            <td>
+                                <button style="background-color: red; color: white; border: 1px solid white;">
+                                    Đã huỷ
+                                </button>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <button style="background-color: black; color: white; border: 1px solid white;">
+                                    @p.Status.ToUpper()
+                                </button>
+                            </td>
+                        }
+                        <td>@p.Address</td>
+                        <td>@FormatString.FormatVNDFromDouble(@p.Total) <span>đ</span></td>
+                        <td><a href="/order/detail/@p.Id">Xem chi tiết</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

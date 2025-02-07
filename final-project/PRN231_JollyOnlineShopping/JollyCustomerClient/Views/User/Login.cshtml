@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    var randomPassword = Context.Session.GetString("RandomPassword");
+}
+
+
+<!--hero banner-->
+<div class="kalles-section page_section_heading">
+    <div class="page-head tc pr oh cat_bg_img page_head_">
+        <div class="parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0"
+             data-bgset="https://demo-kalles-4-1.myshopify.com/cdn/shop/files/shop-banner.jpg?v=1651829187&width=1944"></div>
+        <div class="container pr z_100">
+            <h1 class="mb__5 cw">Tài khoản của tôi</h1>
+        </div>
+    </div>
+</div>
+<!--end hero banner-->
+<!--page content-->
+<div class="container cb">
+    <div class="row">
+        <div class="col-12 col-md-6 login-form mt__60 mb-0 mb-md-5">
+            <div id="CustomerLoginForm" class="kalles-wrap-form">
+                <h2>Đăng nhập</h2>
+                @if (!string.IsNullOrEmpty(@randomPassword))
+                {
+                <p>Đây là mật khẩu mới của bạn: @randomPassword</p>
+                }
+                <form method="post" action="/User/Login" id="form-login">
+                    <p class="form-row">
+                        <label for="lg-email">Email <span class="required">*</span></label>
+                        <input type="email" name="email" id="lg-email" autocomplete="email">
+                    </p>
+                    <p class="form-row">
+                        <label for="lg-pw">Mật khẩu <span class="required">*</span></label>
+                        <input type="password" value="" name="password" id="lg-pw">
+                    </p>
+                    <p>
+                        <a href="#RecoverPasswordForm" class="btn-change-login-form">
+                            Quên mật khẩu?
+                        </a>
+                    </p>
+                    <input type="submit" class="btn js_add_ld" value="Đăng nhập ngay!">
+                </form>
+            </div>
+            <div id="RecoverPasswordForm" class="kalles-wrap-form dn">
+                <h2>Cài đặt lại mật khẩu của bạn</h2>
+                <p>
+                    Hãy điền địa chỉ email của bạn. Mật khẩu của bạn sẽ được cài lại.
+                </p>
+                <form method="post" action="/User/ResetPassword" id="reset-password-form">
+                    <p class="form-row">
+                        <label for="rs-email">Địa chỉ email của bạn</label>
+                        <input type="email" value="" name="email" id="rs-email" class="input-full" required>
+                    </p>
+                    <button id="reset-password-button" class="btn js_add_ld btn-secondary">Đặt lại mật khẩu</button>
+                    <a href="#CustomerLoginForm" class="button ml__15 btn-change-login-form">Huỷ</a>
+                </form>
+            </div>
+
+        </div>
+        <div class="col-12 col-md-6 login-form mt__60 mb__60">
+            <div id="CustomerRegisterForm">
+                <h2>Đăng kí tài khoản</h2>
+                <form method="post" action="/User/Register">
+                    <p class="form-row">
+                        <label for="rgs-f_name">Tên đầy đủ<span class="required">*</span></label>
+                        <input type="text" name="fullname" id="rgs-f_name" autocomplete="given-name" required>
+                    </p>
+                    <p class="form-row">
+                        <label for="reg-l_name">Số điện thoại<span class="required">*</span></label>
+                        <input type="tel" name="phone" id="reg-l_name" autocomplete="family-name" required>
+                    </p>
+                    <p class="form-row">
+                        <label for="reg-email">Email <span class="required">*</span></label>
+                        <input type="email" name="email" id="reg-email" autocomplete="email" aria-required="true" required>
+                    </p>
+                    <p class="form-row">
+                        <label for="reg-pw">Mật khẩu <span class="required">*</span></label>
+                        <input type="password" name="password" id="reg-pw" aria-required="true" required>
+                    </p>
+                    <input type="submit" value="Đăng kí" class="btn js_add_ld">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

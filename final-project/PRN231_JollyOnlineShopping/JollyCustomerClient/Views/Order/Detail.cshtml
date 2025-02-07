@@ -1,0 +1,96 @@
+﻿@using JollyAPI.Models.Entity;
+@using JollyAPI.Models.DTOS;
+@using JollyCustomerClient.Helper;
+@model JollyAPI.Models.DTOS.OrderDetailViewModel
+@*@{
+    List<OrderDetailDTO> orderDetailDTOs = ViewBag.orderDetailDTOs;
+
+}*@
+<link rel="stylesheet" href="/assets/css/shopping-cart.css">
+<!-- hero title -->
+<div class="kalles-section page_section_heading">
+    <div class="page-head tc pr oh page_bg_img page_head_cart_heading">
+        <div class="parallax-inner nt_parallax_false nt_bg_lz pa t__0 l__0 r__0 b__0 lazyload"
+             data-bgset="https://demo-kalles-4-1.myshopify.com/cdn/shop/files/bg-heading.jpg">
+        </div>
+        <div class="container pr z_100">
+            <h1 class="tu mb__10 cw">Chi tiết đơn hàng</h1>
+        </div>
+    </div>
+</div>
+<!-- end hero title -->
+<!--cart section-->
+<div class="kalles-section cart_page_section container mt__60">
+    <form asp-action="Detail" method="get" class="frm_cart_ajax_true frm_cart_page nt_js_cart pr oh ">
+        <div class="cart_header">
+            <div class="row al_center">
+                <div class="col-5">Sản phẩm</div>
+                <div class="col-3 tc">Giá</div>
+                <div class="col-2 tc">Số lượng</div>
+                <div class="col-2 tc tr_md">Tổng</div>
+            </div>
+        </div>
+        <div class="cart_items js_cat_items">
+            @foreach (var item in Model.OrderDetailDTOs)
+            {
+                <div class="cart_item js_cart_item">
+                    <div class="ld_cart_bar"></div>
+                    <div class="row al_center">
+                        <div class="col-12 col-md-12 col-lg-5">
+                            <div class="page_cart_info flex al_center">
+                                <a href="product-detail-layout-01.html">
+                                    <img class="lazyload w__100 lz_op_ef"
+                                     src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%201128%201439%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E"
+                                     data-src="@item.Image" alt="">
+                                </a>
+                                <div class="mini_cart_body ml__15">
+                                    <h5 class="mini_cart_title mg__0 mb__5">
+                                        <a href="product-detail-layout-01.html">@item.ProductName</a>
+                                    </h5>
+                                    <div class="mini_cart_meta">
+                                        <p class="cart_selling_plan"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3 tc__ tc_lg">
+                            <div class="cart_meta_prices price">
+                                <div class="cart_price">@FormatString.FormatVND(item.UnitPrice)<span>đ</span></div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-2 tc mini_cart_actions">
+                            <div class="quantity pr mr__10 qty__true">
+                                <input disabled type="number" class="input-text qty text tc qty_cart_js" name="updates[]"
+                                   value="@item.Quantity">
+                                <div class="qty tc fs__14">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-2 tc__ tr_lg">
+                            <span class="cart-item-price fwm cd js_tt_price_it">@FormatString.FormatVND(item.UnitPrice*item.Quantity)<span>đ</span></span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            }
+        </div>
+        <div class="cart__footer mt__60">
+            <div class="row mb-5">
+                <div class="col-12 col-md-6 cart_actions tl_md tc order-md-2 order-2 mb__50">
+                </div>
+                <div class="col-12 tr_md tc order-md-4 order-4 col-md-6">
+                    <div class="total row in_flex fl_between al_center cd fs__18 tu">
+                        <div class="col-auto"><strong>Tổng đơn:</strong></div>
+                        <div class="col-auto tr js_cat_ttprice fs__20 fwm">
+                            <div class="">@FormatString.FormatVND(Model.SubTotal) VNĐ</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--end cart section-->

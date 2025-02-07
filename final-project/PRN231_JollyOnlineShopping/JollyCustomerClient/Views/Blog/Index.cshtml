@@ -1,0 +1,67 @@
+﻿@using JollyAPI.Models.Entity
+@using JollyCustomerClient.Helper;
+
+@{
+    List<Blog> blogs = ViewBag.blogs;
+    string name = ViewBag.name;
+    int totalBlog = ViewBag.totalBlog;
+    int totalPage = ViewBag.totalPage;
+    int page = ViewBag.page;
+}
+<div class="page-head tc pr oh cat_bg_img page_head_" style="padding: 40px 0!important">
+    <div class="parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0"
+         data-bgset="https://demo-kalles-4-1.myshopify.com/cdn/shop/files/shop-banner.jpg?v=1651829187&width=1944"></div>
+    <div class="container pr z_100">
+        <h1 class="mb__5 cw">Các bài viết về thời trang năm 2023.</h1>
+        <p class="mg__0">Có tất cả: "@blogs.Count bài viết."</p>
+    </div>
+</div>
+<div class="container container_cat cat_default mt__60 mb__20">
+    <!-- Blog List -->
+    <div class="row nt_single_blog">
+        @foreach (var b in blogs)
+        {
+            <div class="col-lg-6 col-md-6 col-12 mb__40">
+                <a class="d-block" href="@Url.Action("Detail", "Blog", new { id = @b.Id })">
+                    <div class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_571"
+                     style="background-image: url('@b.Image'); background-size: auto 90%; background-position: center center;">
+                    </div>
+
+
+                </a>
+                <div class="post-info mb__5">
+
+                    <h2 class="mg__0 fs__16 mt__15 ls__0">
+                        <a class="cd chp open" href="@Url.Action("Detail", "Blog", new { id = @b.Id })">
+                            @b.Title
+                        </a>
+                    </h2>
+                    <p class="mt__10">@b.ShortContent</p>
+                </div>
+
+                <span class="post-author mr__5">By <span class="cd">Admin</span></span>
+                <span class="post-time">on <span class="cd">@b.PublishedDate?.ToString("MMMM d, yyyy")</span></span>
+            </div>
+        }
+    </div>
+    <!--navigation-->
+    <div class="products-footer tc mt__40">
+        <nav class="nt-pagination w__100 tc paginate_ajax">
+            <ul class="pagination-page page-numbers">
+                @for (int i = 1; i <= totalPage; i++)
+                {
+
+                    @if (page == i)
+                    {
+                        <li><a class="page-numbers current" href="/blog?name=@name&page=@i">@i</a></li>
+                    }
+                    else
+                    {
+                        <li><a class="page-numbers" href="/blog?name=@name&page=@i">@i</a></li>
+                    }
+                }
+            </ul>
+        </nav>
+    </div>
+    <!--end navigation-->
+</div>
