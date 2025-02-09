@@ -7,13 +7,11 @@ namespace BusinessObjects
     public class Category
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CategoryID { get; set; }
+        public int CategoryId { get; set; }
+
         [Required, StringLength(40)]
         public string CategoryName { get; set; }
-        [Required, StringLength(255)]
-        public string Description { get; set; }
 
-        [JsonIgnore]
-        public virtual ICollection<FlowerBouquet> FlowerBouquets { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

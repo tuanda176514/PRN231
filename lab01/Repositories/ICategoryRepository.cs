@@ -1,4 +1,4 @@
-﻿using BusinessObjects;
+﻿    using BusinessObjects;
 
 namespace Repositories
 {
@@ -9,6 +9,5 @@ namespace Repositories
         List<Category> GetCategories();
         void UpdateCategory(Category category);
         void DeleteCategory(Category category);
-        List<FlowerBouquet> GetFlowerBouquets(int categoryId);
     }
 }

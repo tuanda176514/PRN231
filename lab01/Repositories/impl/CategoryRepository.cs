@@ -10,6 +10,5 @@ namespace Repositories.impl
         public List<Category> GetCategories() => CategoryDAO.GetCategories();
         public void UpdateCategory(Category category) => CategoryDAO.UpdateCategory(category);
         public void DeleteCategory(Category category) => CategoryDAO.DeleteCategory(category);
-        public List<FlowerBouquet> GetFlowerBouquets(int categoryId) => FlowerBouquetDAO.FindAllFlowerBouquetsByCategoryId(categoryId);
     }
 }

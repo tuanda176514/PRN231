@@ -28,7 +28,7 @@ namespace DataAccess
             {
                 using (var context = new MyDBContext())
                 {
-                    category = context.Categories.SingleOrDefault(c => c.CategoryID == categoryID);
+                    category = context.Categories.SingleOrDefault(c => c.CategoryId == categoryID);
                 }
             }
             catch (Exception ex)
@@ -79,7 +79,7 @@ namespace DataAccess
                 {
                     var categoryToDelete = context
                         .Categories
-                        .SingleOrDefault(c => c.CategoryID == category.CategoryID);
+                        .SingleOrDefault(c => c.CategoryId == category.CategoryId);
                     context.Categories.Remove(categoryToDelete);
                     context.SaveChanges();
                 }

@@ -46,7 +46,6 @@ namespace ManagementAPI.Controllers
             }
 
             cTmp.CategoryName = category.CategoryName;
-            cTmp.Description = category.Description;
 
             repository.UpdateCategory(cTmp);
             return NoContent();

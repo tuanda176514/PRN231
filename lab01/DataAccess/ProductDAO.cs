@@ -1,50 +1,55 @@
 ﻿using BusinessObjects;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class SupplierDAO
+    public class ProductDAO
     {
-        public static List<Supplier> GetSuppliers()
+        public static List<Product> GetProducts()
         {
-            var listSuppliers = new List<Supplier>();
+            var listProducts = new List<Product>();
             try
             {
                 using (var context = new MyDBContext())
                 {
-                    listSuppliers = context.Suppliers.ToList();
+                    listProducts = context.Products.ToList();
                 }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return listSuppliers;
+            return listProducts;
         }
 
-        public static Supplier FindSupplierById(int supplierId)
+        public static Product FindProductById(int productId)
         {
-            var supplier = new Supplier();
+            var product = new Product();
             try
             {
                 using (var context = new MyDBContext())
                 {
-                    supplier = context.Suppliers.SingleOrDefault(s => s.SupplierID == supplierId);
+                    product = context.Products.SingleOrDefault(c => c.ProductId == productId);
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            return supplier;
+            return product;
         }
 
-        public static void SaveSupplier(Supplier supplier)
+        public static void SaveProduct(Product product)
         {
             try
             {
                 using (var context = new MyDBContext())
                 {
-                    context.Suppliers.Add(supplier);
+                    context.Products.Add(product);
                     context.SaveChanges();
                 }
             }
@@ -54,13 +59,13 @@ namespace DataAccess
             }
         }
 
-        public static void UpdateSupplier(Supplier supplier)
+        public static void UpdateProduct(Product product)
         {
             try
             {
                 using (var context = new MyDBContext())
                 {
-                    context.Entry(supplier).State =
+                    context.Entry(product).State =
                         Microsoft.EntityFrameworkCore.EntityState.Modified;
                     context.SaveChanges();
                 }
@@ -71,16 +76,16 @@ namespace DataAccess
             }
         }
 
-        public static void DeleteSupplier(Supplier supplier)
+        public static void DeleteProduct(Product product)
         {
             try
             {
                 using (var context = new MyDBContext())
                 {
-                    var supplierToDelete = context
-                        .Suppliers
-                        .SingleOrDefault(s => s.SupplierID == supplier.SupplierID);
-                    context.Suppliers.Remove(supplierToDelete);
+                    var productToDelete = context
+                        .Products
+                        .SingleOrDefault(c => c.ProductId == product.ProductId);
+                    context.Products.Remove(productToDelete);
                     context.SaveChanges();
                 }
             }
